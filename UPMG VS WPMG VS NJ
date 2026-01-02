@@ -1,0 +1,116 @@
+Phylogenetic Tree Construction Methods
+
+This repository includes multiple distance-based phylogenetic tree construction algorithms implemented from first principles in R, allowing direct comparison of their assumptions, behavior, and computational complexity.
+
+Overview of Methods
+Method	Tree Type	Assumption on Evolutionary Rate	Output
+UPGMA	Rooted	Constant (molecular clock)	Ultrametric tree
+WPGMA	Rooted	Constant (weighted equally)	Ultrametric tree
+Neighbor-Joining (NJ)	Unrooted	No molecular clock assumption	Additive tree
+UPGMA (Unweighted Pair Group Method with Arithmetic Mean)
+
+UPGMA is a hierarchical clustering algorithm that builds a rooted, ultrametric tree by iteratively merging the closest pair of clusters and updating distances using a size-weighted arithmetic mean.
+
+Key Characteristics
+
+Assumes a strict molecular clock (equal evolutionary rates across lineages)
+
+Produces equal root-to-tip distances
+
+Sensitive to violations of clock-like evolution
+
+Strengths
+
+Simple and computationally efficient
+
+Easy to interpret and visualize
+
+Useful for teaching and exploratory analysis
+
+Limitations
+
+Biologically inaccurate when evolutionary rates vary
+
+Can produce misleading topologies for real data
+
+Time Complexity: O(n³)
+Space Complexity: O(n²)
+
+WPGMA (Weighted Pair Group Method with Arithmetic Mean)
+
+WPGMA is closely related to UPGMA but differs in how distances are updated. Instead of weighting by cluster size, WPGMA weights all clusters equally, regardless of the number of sequences they contain.
+
+Key Characteristics
+
+Assumes a molecular clock
+
+Treats merged clusters symmetrically
+
+Produces a rooted ultrametric tree
+
+Strengths
+
+Conceptually simple
+
+Useful for illustrating clustering strategies
+
+Highlights the effect of weighting assumptions
+
+Limitations
+
+Even more sensitive to unequal evolutionary rates than UPGMA
+
+Rarely used in modern phylogenetics for inference
+
+Time Complexity: O(n³)
+Space Complexity: O(n²)
+
+Neighbor-Joining (NJ)
+
+Neighbor-Joining is a distance-based algorithm designed to reconstruct phylogenies without assuming a molecular clock. It identifies pairs of taxa that minimize total tree length using a Q-matrix, producing an unrooted additive tree.
+
+Key Characteristics
+
+Does not assume equal evolutionary rates
+
+Estimates branch lengths explicitly
+
+Produces unrooted trees (can be rooted post-hoc)
+
+Strengths
+
+More biologically realistic than UPGMA/WPGMA
+
+Performs well on real sequence data
+
+Widely used in phylogenetics and comparative genomics
+
+Limitations
+
+Computationally more complex
+
+Still distance-based (information loss vs likelihood methods)
+
+Time Complexity: O(n³)
+Space Complexity: O(n²)
+
+Method Comparison Summary
+Feature	UPGMA	WPGMA	Neighbor-Joining
+Rooted Tree	✅	✅	❌
+Molecular Clock Required	✅	✅	❌
+Branch Length Estimation	Implicit	Implicit	Explicit
+Suitable for Unequal Rates	❌	❌	✅
+Common in Practice	❌	❌	✅
+Educational and Research Context
+
+These implementations are intended to:
+
+Demonstrate core phylogenetic algorithms step-by-step
+
+Highlight how model assumptions affect tree topology
+
+Provide readable, well-annotated reference code for bioinformatics education
+
+Support comparative analysis in computational biology coursework
+
+For large-scale or production phylogenetics, optimized libraries (e.g., PHYLIP, MEGA, APE) are recommended. However, implementing these algorithms from scratch offers valuable insight into how phylogenetic inference works under the hood.
